@@ -1,0 +1,20 @@
+{
+  "name": "ligando-o-computador-game",
+  "version": "1.0.0",
+  "description": "An game made with phaser.js on a freelancer job",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.1"
+  },
+  "devDependencies": {
+    "gulp-audiosprite": "^1.1.0",
+    "gulp-imagemin": "^5.0.3"
+  },
+  "scripts": {
+    "gulp": "gulp"
+  },
+  "author": "Vitor Régis de Ramos",
+  "license": "MIT"
+}
