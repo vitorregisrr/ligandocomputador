@@ -1,14 +1,14 @@
-var faseNumerais = {
-	create: criarFaseNumerais,
-	update: atualizarFaseNumerais,
+var faseMeses = {
+	create: criarFaseMeses,
+	update: atualizarFaseMeses,
 };
 
-function criarFaseNumerais() {
+function criarFaseMeses() {
 	createModals();
 	erros = 0;
 	acertos = 0;
-	levelNumber = 1;
-	levelType = "numeros";
+	levelNumber = 4;
+	levelType = "meses";
 	background = game.add.sprite(0, 0, 'backgroundFase');
 	createGameUI();
 	criaCircuito();
@@ -19,6 +19,6 @@ function criarFaseNumerais() {
 
 }
 
-function atualizarFaseNumerais() {
+function atualizarFaseMeses() {
 	attGameUI();
 }

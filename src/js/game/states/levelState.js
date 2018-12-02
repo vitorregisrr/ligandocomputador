@@ -4,14 +4,6 @@ var levelState = {
 };
 
 //local storage progress stars array
-var starsArray;
-if (!localStorage.starsArray) {
-	starsArray = [0, 4, 4, 4];
-	localStorage.setItem('starsArray', JSON.stringify(starsArray));
-} else {
-	starsArray = JSON.parse(localStorage.starsArray);
-}
-
 var starsArray = [1, 0, 0, 0];
 
 var levels;
@@ -62,11 +54,6 @@ function criarLevelState() {
 		e.inputEnabled = true;
 		e.scale.setTo(0.7, 0.7);
 		e.frame = starsArray[x];
-
-		if (level[x - 1] == 2 && e.frame != 2) {
-			e.frame = 1;
-		}
-
 		levels.add(e);
 	}
 }
@@ -103,7 +90,7 @@ function atualizarLevelState() {
 
 function thumbClicked(button) {
 	// the level is playable, then play the level!!
-	if (button.frame == 1) {
+	if (button.frame > 0) {
 		game.state.start('fase' + button.levelNumber);
 
 	}

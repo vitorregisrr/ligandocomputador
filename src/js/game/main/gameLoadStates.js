@@ -15,6 +15,9 @@ function loadgame() {
     game.state.add('levelState', levelState);
 
     game.state.add('fase1', faseNumerais);
+    game.state.add('fase2', faseMaiusculas);
+    game.state.add('fase3', faseMinusculas);
+    game.state.add('fase4', faseMeses);
 
     //define estado inicial
     game.state.start('bootState');
@@ -22,19 +25,17 @@ function loadgame() {
 
 loadgame();
 
-function gameOver() {
-    game.paused = true;
-    showGameOverModal();
-}
-
 function levelSuccess() {
     //estrelas
     if (starsArray[levelNumber - 1] < 2) {
         starsArray[levelNumber - 1] = 2;
-        localStorage.setItem('starsArray', JSON.stringify(starsArray));
+        
+        if(starsArray[levelNumber] == 0){
+            starsArray[levelNumber] = 1;
+        }
     }
 
-    showGameSucessModal();
+    showNivelSuccessModal();
 }
 
 
