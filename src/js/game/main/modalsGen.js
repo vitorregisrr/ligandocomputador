@@ -237,6 +237,10 @@ function createModals() {
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesMaiusculas");
+                    game.sound.stopAll();
+                    if(soundLoop){
+                        clearInterval(soundLoop);
+                    }
                     sounds.play('musicajogo');
                     soundLoop = setInterval(function () {
                         sounds.play('musicajogo');
@@ -296,6 +300,10 @@ function createModals() {
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesMinusculas");
+                    game.sound.stopAll();
+                    if(soundLoop){
+                        clearInterval(soundLoop);
+                    }
                     sounds.play('musicajogo');
                     soundLoop = setInterval(function () {
                         sounds.play('musicajogo');
@@ -357,6 +365,10 @@ function createModals() {
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesMeses");
+                    game.sound.stopAll();
+                    if(soundLoop){
+                        clearInterval(soundLoop);
+                    }
                     sounds.play('musicajogo');
                     soundLoop = setInterval(function () {
                         sounds.play('musicajogo');
