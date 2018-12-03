@@ -75,7 +75,7 @@ function createModals() {
             },
             {
                 type: "image",
-                content: "proximoNivel",
+                content: "proximoDesafio",
                 offsetY: 90,
                 offsetX: 0,
                 callback: function () {
