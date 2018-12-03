@@ -28,27 +28,27 @@
     },
     "musicainstrucoes": {
       "start": 20,
-      "end": 179.60816326530613,
+      "end": 40.924081632653056,
       "loop": false
     },
     "musicajogo": {
-      "start": 181,
-      "end": 355.49795918367346,
+      "start": 42,
+      "end": 214.01632653061225,
       "loop": false
     },
     "parabenscompletou": {
-      "start": 357,
-      "end": 360.5526530612245,
+      "start": 216,
+      "end": 219.55265306122448,
       "loop": false
     },
     "quepena": {
-      "start": 362,
-      "end": 362.2873469387755,
+      "start": 221,
+      "end": 221.2873469387755,
       "loop": false
     },
     "ultima_fase": {
-      "start": 364,
-      "end": 366.16816326530613,
+      "start": 223,
+      "end": 225.16816326530613,
       "loop": false
     }
   }

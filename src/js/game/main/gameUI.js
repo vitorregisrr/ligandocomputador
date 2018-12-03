@@ -44,10 +44,16 @@ function createGameUI() {
     textoFase.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
 
 	btnSom = game.add.button(930, 750, 'btnSom', function(){
-		config.sounds ? config.sounds = false : config.sounds = true;
-        console.log(config.sounds);
+        if(game.sound.mute){
+			game.sound.mute = false;
+			btnSom.frame = 0;
+		}else{
+			game.sound.mute = true;
+			btnSom.frame = 1;
+        };
         sounds.play('cliqueinstrucoes');
-	});
+    });
+    
 	btnSom.enableBody = true;
 	btnSom.anchor.x = 0.5;
 	btnSom.anchor.y = 0.5;

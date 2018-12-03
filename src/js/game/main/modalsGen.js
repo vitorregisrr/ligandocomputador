@@ -13,7 +13,7 @@ function createModals() {
             {
                 type: "image",
                 content: "tentarNovamente",
-                offsetY: 20,
+                offsetY: 10,
                 offsetX: 0,
                 callback: function () {
                     game.paused = false;
@@ -45,7 +45,7 @@ function createModals() {
             {
                 type: "image",
                 content: "proximoNivel",
-                offsetY: 20,
+                offsetY: 10,
                 offsetX: 0,
                 callback: function () {
                     game.paused = false;
@@ -390,6 +390,7 @@ function showGameOverModal() {
 function showInstrucoesNumerosModal() {
     reg.modal.showModal("instrucoesNumeros");
     game.sound.stopAll();
+    btnSom.bringToTop();
     if(soundLoop){
 		clearInterval(soundLoop);
 	}
@@ -402,6 +403,7 @@ function showInstrucoesNumerosModal() {
 function showInstrucoesMaiusculasModal() {
     reg.modal.showModal("instrucoesMaiusculas");
     game.sound.stopAll();
+    btnSom.bringToTop();
     if(soundLoop){
 		clearInterval(soundLoop);
 	}
@@ -414,6 +416,7 @@ function showInstrucoesMaiusculasModal() {
 function showInstrucoesMinusculasModal() {
     reg.modal.showModal("instrucoesMinusculas");
     game.sound.stopAll();
+    btnSom.bringToTop();
     if(soundLoop){
 		clearInterval(soundLoop);
 	};
@@ -425,6 +428,7 @@ function showInstrucoesMinusculasModal() {
 function showInstrucoesMesesModal() {
     reg.modal.showModal("instrucoesMeses");
     game.sound.stopAll();
+    btnSom.bringToTop();
     if(soundLoop){
 		clearInterval(soundLoop);
 	}
@@ -437,13 +441,16 @@ function showInstrucoesMesesModal() {
 function showModalSair() {
     game.paused = true;
     reg.modal.showModal("modalSair");
+    btnSom.bringToTop();
 }
 
 function showNivelSuccessModal() {
     reg.modal.showModal("nivelSuccess");
+    btnSom.bringToTop();
 }
 
 function showGameSucessModal() {
     reg.modal.showModal("gameSucessModal");
+    btnSom.bringToTop();
     background.frame = 1;
 }

@@ -20,9 +20,19 @@ function pecaSolta(peca) {
         overlap.peca = peca;
         rodada.entradaArr[overlap.posicao] = peca.valor;
 
+        game.add.tween(peca.scale).to({
+            x: 0.75,
+            y: 0.75
+        }, 200, Phaser.Easing.Linear.None, true);
+
     } else {
         peca.x = posPecas[peca.posicao][0];
         peca.y = posPecas[peca.posicao][1];
+
+        game.add.tween(peca.scale).to({
+            x: 0.9,
+            y: 0.9
+        }, 200, Phaser.Easing.Linear.None, true);
 
         placeholders.forEach(function (placeholder) {
             if (placeholder.peca == peca) {
@@ -31,7 +41,8 @@ function pecaSolta(peca) {
             }
         });
     }
-    console.log(rodada.entradaArr);
+
+    //checa se já está completado e se já ganhou
     var cont = 0;
     rodada.entradaArr.forEach(function (item) {
         if (item != undefined) {
@@ -78,11 +89,11 @@ function criaPecas() {
     });
 
     var posPlaceHolders = [
-        [146, 630],
-        [295, 630],
-        [456, 630],
-        [616, 630],
-        [774, 630]
+        [140, 622],
+        [297, 622],
+        [456, 621],
+        [612, 623],
+        [770, 623]
     ];
 
     placeholders = game.add.group();
@@ -100,11 +111,11 @@ function criaPecas() {
     pecas = game.add.group();
 
     posPecas = [
-        [124, 310],
-        [299, 310],
-        [477, 310],
-        [645, 310],
-        [822.5, 310]
+        [122, 317],
+        [299, 317],
+        [482, 317],
+        [656, 317],
+        [829, 317]
     ];
 
     for (x = 0; x <= rodada.pecasArr.length - 1; x++) {
@@ -112,7 +123,7 @@ function criaPecas() {
         var peca = game.add.sprite(posPecas[x][0], posPecas[x][1], 'verso_carta');
         peca.posicao = x;
         peca.valor = rodada.pecasArr[x];
-        peca.scale.setTo(0.8, 0.8);
+        peca.scale.setTo(0.9, 0.9);
         peca.frame = 1;
 
         peca.anchor.set(0.5);
@@ -133,6 +144,15 @@ function criaPecas() {
     });
     textoCronometro.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
     textoCronometro.alpha = 0;
+    textoContagem = game.add.text(430, 100, 'Em contagem regressiva!', {
+        fill: "#fff",
+        fontSize: "30px",
+        fontFamily: "Exo",
+        stroke: '#000000',
+        strokeThickness: 2,
+    });
+    textoContagem.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
+    textoContagem.alpha = 0;
 
     var cont = 0;
     cronometro = game.time.events.add(Phaser.Timer.SECOND * 3, function () {
@@ -148,8 +168,8 @@ function criaPecas() {
             }, this);
 
             peca.backFlipTween = game.add.tween(peca.scale).to({
-                x: 0.8,
-                y: 0.8
+                x: 0.9,
+                y: 0.9
             }, 200 / 2, Phaser.Easing.Linear.None);
 
             peca.flipTween.start();
@@ -159,14 +179,23 @@ function criaPecas() {
             cont++;
             textoCronometro.text = cont;
             textoCronometro.alpha = 1;
-            if (cont == 10) {
+            textoContagem.alpha = 1;
+            if (cont == 2) {
                 game.time.events.remove(cronometro);
                 textoCronometro.destroy();
+                textoContagem.destroy();
 
                 pecas.forEach(function (peca) {
                     peca.inputEnabled = true;
                     peca.input.enableDrag(true);
                     peca.events.onDragStop.add(pecaSolta, this);
+                    peca.events.onDragStart.add(function () {
+                        game.add.tween(peca.scale).to({
+                            x: 0.9,
+                            y: 0.9
+                        }, 200, Phaser.Easing.Linear.None, true);
+                        sounds.play('cliqueinstrucoes');
+                    }, this);
 
                     peca.flipTween = game.add.tween(peca.scale).to({
                         x: 0,
@@ -179,8 +208,8 @@ function criaPecas() {
                     }, this);
 
                     peca.backFlipTween = game.add.tween(peca.scale).to({
-                        x: 0.8,
-                        y: 0.8
+                        x: 0.9,
+                        y: 0.9
                     }, 200 / 2, Phaser.Easing.Linear.None);
 
                     peca.flipTween.start();

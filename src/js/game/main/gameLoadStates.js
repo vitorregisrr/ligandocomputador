@@ -1,5 +1,6 @@
 var game;
 var reg = {};
+
 function loadgame() {
     var screenWidth = 1000;
     var screenHeight = 800;
@@ -21,8 +22,8 @@ function loadgame() {
 
     //define estado inicial
     game.state.start('bootState');
+    game.sound.mute = false;
 }
-
 loadgame();
 
 function levelSuccess() {

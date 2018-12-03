@@ -37,9 +37,13 @@ function criarLevelState() {
 	logoEditora.scale.setTo(0.8, 0.8);
 
 	btnSom = game.add.button(930, 740, 'btnSom', function(){
-		config.sounds ? config.sounds = false : config.sounds = true;
-		console.log(config.sounds);
-		sounds.play('cliqueinstrucoes');
+		if(game.sound.mute){
+			game.sound.mute = false;
+			btnSom.frame = 0;
+		}else{
+			game.sound.mute = true;
+			btnSom.frame = 1;
+		};
 	});
 
 	btnSom.enableBody = true;

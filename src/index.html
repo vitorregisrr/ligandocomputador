@@ -19,8 +19,9 @@
             background-repeat: no-repeat;
             width: 100vw;
             height: 100vh;
+            overflow: hidden;
         }
-
+        
         #game{
             margin:0;
             padding:0;
@@ -35,15 +36,15 @@
 </body>
 
 </html>
-<!-- <script type="text/javascript" src="js/cordova.js"></script> -->
+<script type="text/javascript" src="js/cordova.js"></script>
+<!-- <script src="main.js"></script> -->
 
-<script src='js/phaser.js'></script>
-
+<script src="js/phaser.js"></script>
 <script src="js/game/main/soundsJson.js"></script>
 <script src="js/game/main/bancoCombinacoes.js"></script>
-<script src="js/game/main/rodada.js"></script>
 <script src="js/game/main/criaCircuito.js"></script>
 <script src="js/game/main/eventoPecas.js"></script>
+<script src="js/game/main/rodada.js"></script>
 <script src="js/libs/modalLib.js"></script>
 <script src="js/libs/tooltipLib.js"></script>
 <script src="js/libs/phase-slide.js"></script>
@@ -62,10 +63,10 @@
 <script src="js/game/main/sounds.js"></script>
 
 <script>
-        window.onerror = function (message, url, linenumber) {
-            window.alert("JavaScript error: " + message + " on line " +
-                linenumber + " for " + url);
-        }
-    </script>
+    window.onerror = function (message, url, linenumber) {
+        window.alert("JavaScript error: " + message + " on line " +
+            linenumber + " for " + url);
+    }
+</script>
 
 <!-- //game logic-->

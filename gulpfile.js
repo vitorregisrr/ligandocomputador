@@ -20,22 +20,34 @@ gulp.task('imagesmin', function () {
 
 gulp.task('js', function () {
     gulp.src([
+            'src/js/phaser.js',
+
+            'src/js/game/main/soundsJson.js',
+            'src/js/game/main/bancoCombinacoes.js',
+            'src/js/game/main/criaCircuito.js',
+            'src/js/game/main/eventoPecas.js',
+            'src/js/game/main/sounds.js',
 
             'src/js/libs/modalLib.js',
-            'src/js/libs/tooltipLib.js.js',
-            'src/js/libs/phase-slide.js.js',
+            'src/js/libs/tooltipLib.js',
+            'src/js/libs/phase-slide.js',
 
-            'src/js/states/preloadState.js',
-            'src/js/states/startState.js',
-            'src/js/states/levelState.js',
-            'src/js/states/bootState.js',
-            'src/js/states/gameLoadStates.js',
+            'src/js/game/main/modalsGen.js',
+            'src/js/game/main/rodada.js',
+            'src/js/game/main/gameUI.js',
 
-            'src/js/main/gameUI.js',
-            'src/js/main/modalsGen.js',
-            'src/js/main/sounds.js'
+            'src/js/game/states/preloadState.js',
+            'src/js/game/states/bootState.js',
+            'src/js/game/states/levelState.js',
+            'src/js/game/states/faseNumerais.js',
+            'src/js/game/states/faseMaiusculas.js',
+            'src/js/game/states/faseMinusculas.js',
+            'src/js/game/states/faseMeses.js',
+
+            'src/js/game/main/gameLoadStates.js',
 
         ])
         .pipe(concat('main.js'))
+        .pipe(uglify())
         .pipe(gulp.dest('src/js/'));
 });
