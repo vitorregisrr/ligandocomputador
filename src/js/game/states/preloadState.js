@@ -41,7 +41,7 @@ function precarregarPreload() {
     game.load.spritesheet('instrucoesMeses','assets/instrucoesMeses.png', 926, 572, 2);
     game.load.spritesheet('instrucoesNumeros','assets/instrucoesNumeros.png', 926, 572, 2);
     game.load.image('sairNao','assets/sairNao.png');
-    game.load.image('iniciar','assets/INICIAR.png');
+    game.load.image('iniciar','assets/INICIAR.PNG');
     game.load.image('setaEsquerda','assets/setaEsquerda.png');
     game.load.image('setaDireita','assets/setaDireita.png');
     game.load.image('modalSair','assets/modalSair.png');
