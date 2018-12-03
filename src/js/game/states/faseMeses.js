@@ -12,10 +12,9 @@ function criarFaseMeses() {
 	background = game.add.sprite(0, 0, 'backgroundFase');
 	createGameUI();
 	criaCircuito();
-
 	rodadaAtual = 0;
-
 	novaRodada();
+	showInstrucoesMesesModal();
 
 }
 

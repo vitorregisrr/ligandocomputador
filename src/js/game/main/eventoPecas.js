@@ -40,14 +40,15 @@ function pecaSolta(peca) {
     });
 
     if (cont == 5) {
-        for(x = 0; x < rodada.entradaArr.length ; x++){
-            if(Array.from(rodada.entradaArr)[x] == Array.from(rodada.corretoArr)[x]){
+        for (x = 0; x < rodada.entradaArr.length; x++) {
+            if (Array.from(rodada.entradaArr)[x] == Array.from(rodada.corretoArr)[x]) {
                 lampadas.getAt(x).frame = 1;
             }
         }
 
         if (rodada.entradaArr.toString() == rodada.corretoArr.toString()) {
             showGameSucessModal();
+            circuito.frame = 1;
 
         } else {
             showGameOverModal();
@@ -55,32 +56,34 @@ function pecaSolta(peca) {
     }
 
 }
+
 function criaPecas() {
 
-    lampadas.forEach(function(lampada){
+    circuito.frame = 0;
+    lampadas.forEach(function (lampada) {
         lampada.frame = 0;
     });
-    
+
     var posPlaceHolders = [
-		[146, 630],
-		[295, 630],
-		[456, 630],
-		[616, 630],
-		[774, 630]
-	];
+        [146, 630],
+        [295, 630],
+        [456, 630],
+        [616, 630],
+        [774, 630]
+    ];
 
-	placeholders = game.add.group();
+    placeholders = game.add.group();
 
-	for(x=0; x < posPlaceHolders.length; x++){
-		var placeholder = game.add.sprite(posPlaceHolders[x][0], posPlaceHolders[x][1], 'verso_carta');
-		placeholder.scale.setTo(0.8, 0.8);
-		placeholder.posicao = x;
-		placeholder.anchor.setTo(0.5, 0.5);
-		placeholder.ocupado = undefined;
-		placeholder.alpha = 0;
-		placeholders.add(placeholder);
+    for (x = 0; x < posPlaceHolders.length; x++) {
+        var placeholder = game.add.sprite(posPlaceHolders[x][0], posPlaceHolders[x][1], 'verso_carta');
+        placeholder.scale.setTo(0.8, 0.8);
+        placeholder.posicao = x;
+        placeholder.anchor.setTo(0.5, 0.5);
+        placeholder.ocupado = undefined;
+        placeholder.alpha = 0;
+        placeholders.add(placeholder);
     }
-    
+
     pecas = game.add.group();
 
     posPecas = [
@@ -108,13 +111,20 @@ function criaPecas() {
         peca.addChild(text);
     }
 
-    game.time.events.add(Phaser.Timer.SECOND * 2, function () {
+    textoCronometro = game.add.text(800, 50, peca.valor, {
+        fill: "#fff",
+        fontSize: "120px",
+        fontFamily: "Exo"
+    });
 
+    textoCronometro.alpha = 0;
+    textoCronometro.stroke = '#000000';
+    textoCronometro.strokeThickness = 2;
+    textoCronometro.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
+
+    var cont = 0;
+    cronometro = game.time.events.add(Phaser.Timer.SECOND * 3, function () {
         pecas.forEach(function (peca) {
-            peca.inputEnabled = true;
-            peca.input.enableDrag(true);
-            peca.events.onDragStop.add(pecaSolta, this);
-
             peca.flipTween = game.add.tween(peca.scale).to({
                 x: 0,
                 y: 1.2
@@ -133,7 +143,40 @@ function criaPecas() {
             peca.flipTween.start();
         });
 
-    }, this);
+        cronometro = game.time.events.loop(Phaser.Timer.SECOND * 1, function () {
+            cont++;
+            textoCronometro.text = cont;
+            textoCronometro.alpha = 1;
+
+            if (cont == 10) {
+                game.time.events.remove(cronometro);
+                textoCronometro.destroy();
+
+                pecas.forEach(function (peca) {
+                    peca.inputEnabled = true;
+                    peca.input.enableDrag(true);
+                    peca.events.onDragStop.add(pecaSolta, this);
+
+                    peca.flipTween = game.add.tween(peca.scale).to({
+                        x: 0,
+                        y: 1.2
+                    }, 200 / 2, Phaser.Easing.Linear.None);
+
+                    peca.flipTween.onComplete.add(function () {
+                        peca.frame == 1 ? peca.frame = 0 : peca.frame = 1;
+                        peca.backFlipTween.start();
+                    }, this);
+
+                    peca.backFlipTween = game.add.tween(peca.scale).to({
+                        x: 0.8,
+                        y: 0.8
+                    }, 200 / 2, Phaser.Easing.Linear.None);
+
+                    peca.flipTween.start();
+                });
+            }
+        })
+    });
 
 }
 
