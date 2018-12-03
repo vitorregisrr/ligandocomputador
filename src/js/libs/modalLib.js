@@ -113,6 +113,7 @@ gameModal = function(game) {
                 var graphicH = item.graphicHeight || 200;
                 var graphicRadius = item.graphicRadius || 0;
                 var lockPosition = item.lockPosition || false;
+                var alpha = item.alpha == 0 ? 0 : 1;
 
                 var itemAnchor = item.anchor || { x: 0, y: 0 };
                 var itemAngle = item.angle || 0;
@@ -172,6 +173,7 @@ gameModal = function(game) {
                     modalLabel.contentType = 'sprite';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
+                    modalLabel.alpha = alpha;
                 } else if (itemType === "button") {
                     modalLabel = game.add.button(0, 0, atlasParent, callback,
                         this, buttonHover, content, buttonActive, content);

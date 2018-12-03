@@ -36,7 +36,7 @@ function precarregarPreload() {
     game.load.image('btnClose', 'assets/btnClose.png');
     game.load.image('backgroundNormal', 'assets/backgroundNormal.png');
     game.load.spritesheet('backgroundFase', 'assets/backgroundFase.png', 1000, 800, 2);
-    game.load.spritesheet('verso_carta', 'assets/verso_carta.png', 168, 168, 2);
+    game.load.image('verso_carta', 'assets/verso_carta.png');
     game.load.image('sairSim', 'assets/sairSim.png');
     game.load.image('fundoInstrucoes', 'assets/fundoInstrucoes.png');
     game.load.spritesheet('instrucoesLetrasMinusculas', 'assets/instrucoesLetrasMinusculas.png', 926, 572, 2);
@@ -58,6 +58,85 @@ function precarregarPreload() {
     game.load.image('estatisticas', 'assets/estatisticas.png');
     game.load.spritesheet('lampada', 'assets/lampada.png', 70, 103, 2);
     game.load.audiosprite('sfx', ['assets/sounds/spriteJson/sprite.ogg', 'assets/sounds/spriteJson/sprite.m4a'], null, sfxJson);
+
+    game.load.image('peca_0', 'assets/peca_0.png');
+    game.load.image('peca_1', 'assets/peca_1.png');
+    game.load.image('peca_2', 'assets/peca_2.png');
+    game.load.image('peca_3', 'assets/peca_3.png');
+    game.load.image('peca_4', 'assets/peca_4.png');
+    game.load.image('peca_5', 'assets/peca_5.png');
+    game.load.image('peca_6', 'assets/peca_6.png');
+    game.load.image('peca_7', 'assets/peca_7.png');
+    game.load.image('peca_8', 'assets/peca_8.png');
+    game.load.image('peca_9', 'assets/peca_9.png');
+    game.load.image('peca_10', 'assets/peca_10.png');
+
+    game.load.image('peca_AM', 'assets/peca_AM.png');
+    game.load.image('peca_BM', 'assets/peca_BM.png');
+    game.load.image('peca_CM', 'assets/peca_CM.png');
+    game.load.image('peca_DM', 'assets/peca_DM.png');
+    game.load.image('peca_EM', 'assets/peca_EM.png');
+    game.load.image('peca_FM', 'assets/peca_FM.png');
+    game.load.image('peca_GM', 'assets/peca_GM.png');
+    game.load.image('peca_HM', 'assets/peca_HM.png');
+    game.load.image('peca_IM', 'assets/peca_IM.png');
+    game.load.image('peca_JM', 'assets/peca_JM.png');
+    game.load.image('peca_KM', 'assets/peca_KM.png');
+    game.load.image('peca_LM', 'assets/peca_LM.png');
+    game.load.image('peca_MM', 'assets/peca_MM.png');
+    game.load.image('peca_NM', 'assets/peca_NM.png');
+    game.load.image('peca_OM', 'assets/peca_OM.png');
+    game.load.image('peca_PM', 'assets/peca_PM.png');
+    game.load.image('peca_QM', 'assets/peca_QM.png');
+    game.load.image('peca_RM', 'assets/peca_RM.png');
+    game.load.image('peca_SM', 'assets/peca_SM.png');
+    game.load.image('peca_TM', 'assets/peca_TM.png');
+    game.load.image('peca_UM', 'assets/peca_UM.png');
+    game.load.image('peca_VM', 'assets/peca_VM.png');
+    game.load.image('peca_WM', 'assets/peca_WM.png');
+    game.load.image('peca_XM', 'assets/peca_XM.png');
+    game.load.image('peca_YM', 'assets/peca_YM.png');
+    game.load.image('peca_ZM', 'assets/peca_ZM.png');
+
+    game.load.image('peca_a', 'assets/peca_a.png');
+    game.load.image('peca_b', 'assets/peca_b.png');
+    game.load.image('peca_c', 'assets/peca_c.png');
+    game.load.image('peca_d', 'assets/peca_d.png');
+    game.load.image('peca_e', 'assets/peca_e.png');
+    game.load.image('peca_f', 'assets/peca_f.png');
+    game.load.image('peca_g', 'assets/peca_g.png');
+    game.load.image('peca_h', 'assets/peca_h.png');
+    game.load.image('peca_i', 'assets/peca_i.png');
+    game.load.image('peca_j', 'assets/peca_m.png');
+    game.load.image('peca_k', 'assets/peca_k.png');
+    game.load.image('peca_l', 'assets/peca_l.png');
+    game.load.image('peca_m', 'assets/peca_m.png');
+    game.load.image('peca_n', 'assets/peca_n.png');
+    game.load.image('peca_o', 'assets/peca_o.png');
+    game.load.image('peca_p', 'assets/peca_p.png');
+    game.load.image('peca_q', 'assets/peca_q.png');
+    game.load.image('peca_r', 'assets/peca_r.png');
+    game.load.image('peca_s', 'assets/peca_s.png');
+    game.load.image('peca_t', 'assets/peca_t.png');
+    game.load.image('peca_u', 'assets/peca_u.png');
+    game.load.image('peca_v', 'assets/peca_v.png');
+    game.load.image('peca_w', 'assets/peca_w.png');
+    game.load.image('peca_x', 'assets/peca_x.png');
+    game.load.image('peca_y', 'assets/peca_y.png');
+    game.load.image('peca_z', 'assets/peca_z.png');
+
+    game.load.image('peca_janeiro', 'assets/peca_janeiro.png');
+    game.load.image('peca_fevereiro', 'assets/peca_fevereiro.png');
+    game.load.image('peca_marco', 'assets/peca_marco.png');
+    game.load.image('peca_maio', 'assets/peca_maio.png');
+    game.load.image('peca_abril', 'assets/peca_abril.png');
+    game.load.image('peca_junho', 'assets/peca_junho.png');
+    game.load.image('peca_julho', 'assets/peca_julho.png');
+    game.load.image('peca_agosto', 'assets/peca_agosto.png');
+    game.load.image('peca_outubro', 'assets/peca_outubro.png');
+    game.load.image('peca_setembro', 'assets/peca_setembro.png');
+    game.load.image('peca_novembro', 'assets/peca_novembro.png');
+    game.load.image('peca_dezembro', 'assets/peca_dezembro.png');
 }
 
 

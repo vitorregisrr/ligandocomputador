@@ -54,6 +54,25 @@ function pecaSolta(peca) {
         for (x = 0; x < rodada.entradaArr.length; x++) {
             if (Array.from(rodada.entradaArr)[x] == Array.from(rodada.corretoArr)[x]) {
                 lampadas.getAt(x).frame = 1;
+                pecas.forEach(function (peca) {
+                    peca.flipTween = game.add.tween(peca.scale).to({
+                        x: 0,
+                        y: 1.2
+                    }, 500 / 2, Phaser.Easing.Linear.None);
+        
+                    var fix = levelType == "letrasMaiusculas" ? fix = "M" : fix = "";
+                    peca.flipTween.onComplete.add(function () {
+                        peca.loadTexture('peca_'+peca.valor+fix)
+                        peca.backFlipTween.start();
+                    }, this);
+        
+                    peca.backFlipTween = game.add.tween(peca.scale).to({
+                        x: 0.9,
+                        y: 0.9
+                    }, 500 / 2, Phaser.Easing.Linear.None);
+        
+                    peca.flipTween.start();
+                });
             }
         }
 
@@ -75,7 +94,6 @@ function pecaSolta(peca) {
                 peca.input.draggable = false;
             });
             showGameOverModal();
-
         }
     }
 
@@ -132,6 +150,7 @@ function criaPecas() {
         text = game.add.text(0, 0, peca.valor, {
             fill: "#fff",
         });
+        text.alpha = 0;
         peca.addChild(text);
     }
 
@@ -144,7 +163,7 @@ function criaPecas() {
     });
     textoCronometro.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
     textoCronometro.alpha = 0;
-    textoContagem = game.add.text(430, 100, 'Em contagem regressiva!', {
+    textoContagem = game.add.text(470, 100, 'Contagem regressiva!', {
         fill: "#fff",
         fontSize: "30px",
         fontFamily: "Exo",
@@ -162,8 +181,9 @@ function criaPecas() {
                 y: 1.2
             }, 200 / 2, Phaser.Easing.Linear.None);
 
+            var fix = levelType == "letrasMaiusculas" ? fix = "M" : fix = "";
             peca.flipTween.onComplete.add(function () {
-                peca.frame = 0;
+                peca.loadTexture('peca_'+peca.valor+fix)
                 peca.backFlipTween.start();
             }, this);
 
@@ -180,7 +200,7 @@ function criaPecas() {
             textoCronometro.text = cont;
             textoCronometro.alpha = 1;
             textoContagem.alpha = 1;
-            if (cont == 2) {
+            if (cont == 10) {
                 game.time.events.remove(cronometro);
                 textoCronometro.destroy();
                 textoContagem.destroy();
@@ -203,7 +223,7 @@ function criaPecas() {
                     }, 200 / 2, Phaser.Easing.Linear.None);
 
                     peca.flipTween.onComplete.add(function () {
-                        peca.frame == 1 ? peca.frame = 0 : peca.frame = 1;
+                        peca.loadTexture('verso_carta')
                         peca.backFlipTween.start();
                     }, this);
 

@@ -164,6 +164,8 @@ function createModals() {
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesNumeros', 3);
                     sounds.play('cliqueinstrucoes');
+                    reg.modal.getModalItem("instrucoesNumeros", 6).alpha = 1;
+                    
                 }
             },
             {
@@ -172,6 +174,7 @@ function createModals() {
                 offsetY: 260,
                 offsetX: 0,
                 contentScale: 1,
+                alpha: 0,
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesNumeros");
@@ -226,6 +229,7 @@ function createModals() {
                 contentScale: 1,
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesMaiusculas', 3);
+                    reg.modal.getModalItem("instrucoesMaiusculas", 6).alpha = 1;
                 }
             },
             {
@@ -233,6 +237,7 @@ function createModals() {
                 content: "iniciar",
                 offsetY: 260,
                 offsetX: 0,
+                alpha: 0,
                 contentScale: 1,
                 callback: function () {
                     game.paused = false;
@@ -289,6 +294,7 @@ function createModals() {
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesMinusculas', 3);
                     sounds.play('cliqueinstrucoes');
+                    reg.modal.getModalItem("instrucoesMinusculas", 6).alpha = 1;
                 }
             },
             {
@@ -296,6 +302,7 @@ function createModals() {
                 content: "iniciar",
                 offsetY: 260,
                 offsetX: 0,
+                alpha: 0,
                 contentScale: 1,
                 callback: function () {
                     game.paused = false;
@@ -354,6 +361,7 @@ function createModals() {
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesMeses', 3);
                     sounds.play('cliqueinstrucoes');
+                    reg.modal.getModalItem("instrucoesMeses", 6).alpha = 1;
                 }
             },
             {
@@ -362,6 +370,7 @@ function createModals() {
                 offsetY: 260,
                 offsetX: 0,
                 contentScale: 1,
+                alpha: 0,
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesMeses");
