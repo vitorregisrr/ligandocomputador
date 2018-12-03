@@ -5,11 +5,11 @@ var gulp = require('gulp'),
     audiosprite = require('gulp-audiosprite');
 
 gulp.task('audiosprite', function () {
-    gulp.src('src/assets/audios/locucao/*.mp3')
+    gulp.src('src/assets/sounds/*.mp3')
         .pipe(audiosprite({
-            format: 'm4a'
+            format: 'ogg'
         }))
-        .pipe(gulp.dest('src/assets/audios/locucao/spriteJson/'));
+        .pipe(gulp.dest('src/assets/sounds/spriteJson'));
 });
 
 gulp.task('imagesmin', function () {

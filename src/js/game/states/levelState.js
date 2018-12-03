@@ -9,7 +9,7 @@ var starsArray = [1, 0, 0, 0];
 var levels;
 
 function criarLevelState() {
-
+	sounds.gen();
 	createModals();
 	//gerando o bg
 	game.add.sprite(0, 0, 'backgroundNormal');
@@ -28,7 +28,8 @@ function criarLevelState() {
 
 	btnSom = game.add.button(930, 740, 'btnSom', function(){
 		config.sounds ? config.sounds = false : config.sounds = true;
-		console.log(config.sounds)
+		console.log(config.sounds);
+		sounds.play('cliqueinstrucoes');
 	});
 
 	btnSom.enableBody = true;
@@ -89,6 +90,7 @@ function atualizarLevelState() {
 }
 
 function thumbClicked(button) {
+	sounds.play('cliqueinstrucoes');
 	// the level is playable, then play the level!!
 	if (button.frame > 0) {
 		game.state.start('fase' + button.levelNumber);

@@ -1,74 +1,53 @@
-config ={
+config = {
     sounds: true
 }
+
 var sounds = {
     gen: function () {
-        this.hurt = game.add.audio('hurt');
-        this.attack = game.add.audio('attack');
-        this.right = game.add.audio('right');
-        this.mutScream = game.add.audio('mutScream');
-        this.boxChange = game.add.audio('boxChange');
-        this.boxChange.volume = 0.2;
-        this.door = game.add.audio('door');
-        this.catch = game.add.audio('catch');
-        this.wrong = game.add.audio('wrong');
-        this.wrong.volume = 0.2;
-
+        if (config.sounds) {
+            sfx = game.add.audioSprite('sfx');
+            sfx.allowMultiple = true;
+        }
     },
 
     play: function (id) {
         if (config.sounds) {
             switch (id) {
-                case 'change':
-                    this.change.play();
+                case 'cliqueinstrucoes':
+                    sfx.play('cliqueinstrucoes');
                     break;
 
-                case 'boxChange':
-                    this.boxChange.play();
+                case 'cronometro':
+                    sfx.play('cronometro');
                     break;
 
-                case 'fall':
-                    this.fall.play();
+                case 'encaixado':
+                    sfx.play('encaixado');
                     break;
 
-                case 'attack':
-                    this.attack.play();
+                case 'final10s':
+                    sfx.play('final10s');
                     break;
 
-                case 'hurt':
-                    this.hurt.play();
+                case 'musicainstrucoes':
+                    sfx.play('musicainstrucoes');
                     break;
 
-                case 'angry':
-                    this.angry.play();
+                case 'musicajogo':
+                    sfx.play('musicajogo');
                     break;
 
-                case 'right':
-                    this.right.play();
+
+                case 'parabenscompletou':
+                    sfx.play('parabenscompletou');
                     break;
 
-                case 'wrong':
-                    this.wrong.play();
+                case 'quepena':
+                    sfx.play('quepena');
                     break;
 
-                case 'mutScream':
-                    this.mutScream.play();
-                    break;
-
-                case 'mutAttack':
-
-                    break;
-
-                case 'mutDie':
-
-                    break;
-
-                case 'door':
-                    this.door.play();
-                    break;
-
-                case 'catch':
-                    this.catch.play();
+                case 'ultima_fase':
+                    sfx.play('ultima_fase');
                     break;
             }
         } else {

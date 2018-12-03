@@ -5,6 +5,7 @@ var faseMaiusculas = {
 
 function criarFaseMaiusculas() {
 	createModals();
+	sounds.gen();
 	erros = 0;
 	acertos = 0;
 	levelNumber = 2;

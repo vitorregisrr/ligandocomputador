@@ -5,6 +5,7 @@ var faseMinusculas = {
 
 function criarFaseMinusculas() {
 	createModals();
+	sounds.gen();
 	erros = 0;
 	acertos = 0;
 	levelNumber = 3;
@@ -13,7 +14,6 @@ function criarFaseMinusculas() {
 	createGameUI();
 	criaCircuito();
 	rodadaAtual = 0;
-	novaRodada();
 	showInstrucoesMinusculasModal();
 
 }

@@ -1,7 +1,7 @@
 function pecaSolta(peca) {
     var overlap = checkPlaceholderOverlap(peca);
     if (overlap && !overlap.peca) {
-
+        sounds.play('cliqueinstrucoes');
         placeholders.forEach(function (placeholder) {
             if (placeholder.peca == peca) {
                 placeholder.peca = undefined;
@@ -47,11 +47,24 @@ function pecaSolta(peca) {
         }
 
         if (rodada.entradaArr.toString() == rodada.corretoArr.toString()) {
-            showGameSucessModal();
+            sounds.play('parabenscompletou');
+            setTimeout(() => {
+                showGameSucessModal();
+                circuito.frame = 1;
+            }, 3000);
             circuito.frame = 1;
 
+            pecas.forEach(function (peca) {
+                peca.input.draggable = false;
+            });
+
         } else {
+            sounds.play('quepena');
+            pecas.forEach(function (peca) {
+                peca.input.draggable = false;
+            });
             showGameOverModal();
+
         }
     }
 
@@ -142,12 +155,11 @@ function criaPecas() {
 
             peca.flipTween.start();
         });
-
+        sounds.play('cronometro');
         cronometro = game.time.events.loop(Phaser.Timer.SECOND * 1, function () {
             cont++;
             textoCronometro.text = cont;
             textoCronometro.alpha = 1;
-
             if (cont == 10) {
                 game.time.events.remove(cronometro);
                 textoCronometro.destroy();
@@ -173,6 +185,7 @@ function criaPecas() {
                     }, 200 / 2, Phaser.Easing.Linear.None);
 
                     peca.flipTween.start();
+                    sounds.play('final10s');
                 });
             }
         })

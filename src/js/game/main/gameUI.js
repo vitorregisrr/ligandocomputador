@@ -13,7 +13,8 @@ function createGameUI() {
 
 	btnSom = game.add.button(930, 750, 'btnSom', function(){
 		config.sounds ? config.sounds = false : config.sounds = true;
-		console.log(config.sounds)
+        console.log(config.sounds);
+        sounds.play('cliqueinstrucoes');
 	});
 	btnSom.enableBody = true;
 	btnSom.anchor.x = 0.5;
@@ -22,7 +23,8 @@ function createGameUI() {
 
 	
 	btnClose = game.add.button(960, 40, 'btnClose', function(){
-		showModalSair();
+        showModalSair();
+        sounds.play('cliqueinstrucoes');
 	});
 	btnClose.enableBody = true;
 	btnClose.anchor.x = 0.5;

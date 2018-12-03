@@ -24,6 +24,7 @@ function createModals() {
                     novaRodada(false);
                     circuito.frame = 0;
                     erros++;
+                    sounds.play('cliqueinstrucoes');
                 }
             },
         ]
@@ -53,11 +54,12 @@ function createModals() {
                     placeholders.destroy();
                     novaRodada(true);
                     acertos++;
+                    sounds.play('cliqueinstrucoes');
                 }
             },
         ]
     });
-    
+
     reg.modal.createModal({
         type: "nivelSuccess",
         includeBackground: true,
@@ -79,6 +81,7 @@ function createModals() {
                     reg.modal.hideModal("nivelSuccess");
                     background.frame = 0;
                     game.state.start('levelState');
+                    sounds.play('cliqueinstrucoes');
                 }
             },
         ]
@@ -103,6 +106,7 @@ function createModals() {
                 callback: function () {
                     game.paused = false;
                     game.state.start('levelState');
+                    sounds.play('cliqueinstrucoes');
                 }
             },
             {
@@ -113,6 +117,7 @@ function createModals() {
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("modalSair");
+                    sounds.play('cliqueinstrucoes');
                 }
             },
         ]
@@ -135,8 +140,7 @@ function createModals() {
                 content: "instrucoesNumeros",
                 offsetY: 0,
                 offsetX: 0,
-                callback: function () {
-                }
+                callback: function () {}
             },
             {
                 type: "sprite",
@@ -146,6 +150,7 @@ function createModals() {
                 contentScale: 1,
                 callback: function () {
                     reg.modal.updateModalValue(0, 'instrucoesNumeros', 3);
+                    sounds.play('cliqueinstrucoes');
                 }
             },
             {
@@ -156,6 +161,7 @@ function createModals() {
                 contentScale: 1,
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesNumeros', 3);
+                    sounds.play('cliqueinstrucoes');
                 }
             },
             {
@@ -167,6 +173,12 @@ function createModals() {
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesNumeros");
+                    game.sound.stopAll();
+                    sounds.play('musicajogo');
+                    soundLoop = setInterval(function () {
+                        sounds.play('musicajogo');
+                    }, 150000);
+                    novaRodada();
                 }
             }
         ]
@@ -189,8 +201,7 @@ function createModals() {
                 content: "instrucoesLetrasMaiusculas",
                 offsetY: -20,
                 offsetX: 0,
-                callback: function () {
-                }
+                callback: function () {}
             },
             {
                 type: "sprite",
@@ -221,6 +232,11 @@ function createModals() {
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesMaiusculas");
+                    sounds.play('musicajogo');
+                    soundLoop = setInterval(function () {
+                        sounds.play('musicajogo');
+                    }, 150000);
+                    novaRodada();
                 }
             }
         ]
@@ -242,8 +258,7 @@ function createModals() {
                 content: "instrucoesLetrasMinusculas",
                 offsetY: -20,
                 offsetX: 0,
-                callback: function () {
-                }
+                callback: function () {}
             },
             {
                 type: "sprite",
@@ -253,6 +268,7 @@ function createModals() {
                 contentScale: 1,
                 callback: function () {
                     reg.modal.updateModalValue(0, 'instrucoesMinusculas', 3);
+                    sounds.play('cliqueinstrucoes');
                 }
             },
             {
@@ -263,6 +279,7 @@ function createModals() {
                 contentScale: 1,
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesMinusculas', 3);
+                    sounds.play('cliqueinstrucoes');
                 }
             },
             {
@@ -274,6 +291,12 @@ function createModals() {
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesMinusculas");
+                    sounds.play('musicajogo');
+                    soundLoop = setInterval(function () {
+                        sounds.play('musicajogo');
+                    }, 150000);
+                    novaRodada();
+                    sounds.play('cliqueinstrucoes');
                 }
             }
         ]
@@ -296,8 +319,7 @@ function createModals() {
                 content: "instrucoesMeses",
                 offsetY: -20,
                 offsetX: 0,
-                callback: function () {
-                }
+                callback: function () {}
             },
             {
                 type: "sprite",
@@ -307,6 +329,7 @@ function createModals() {
                 contentScale: 1,
                 callback: function () {
                     reg.modal.updateModalValue(0, 'instrucoesMeses', 3);
+                    sounds.play('cliqueinstrucoes');
                 }
             },
             {
@@ -317,6 +340,7 @@ function createModals() {
                 contentScale: 1,
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesMeses', 3);
+                    sounds.play('cliqueinstrucoes');
                 }
             },
             {
@@ -328,6 +352,12 @@ function createModals() {
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesMeses");
+                    sounds.play('musicajogo');
+                    soundLoop = setInterval(function () {
+                        sounds.play('musicajogo');
+                    }, 150000);
+                    novaRodada();
+                    sounds.play('cliqueinstrucoes');
                 }
             }
         ]
@@ -336,29 +366,48 @@ function createModals() {
 
 
 function showGameOverModal() {
-    game.paused = true;
     reg.modal.showModal("gameOverModal");
     background.frame = 1;
 }
 
 function showInstrucoesNumerosModal() {
-    game.paused = true;
     reg.modal.showModal("instrucoesNumeros");
+    game.sound.stopAll();
+    sounds.play('musicainstrucoes');
+    soundLoop = setInterval(function () {
+        sounds.play('musicainstrucoes');
+    }, 144000);
 }
+
 function showInstrucoesMaiusculasModal() {
-    game.paused = true;
     reg.modal.showModal("instrucoesMaiusculas");
+    game.sound.stopAll();
+    sounds.play('musicainstrucoes');
+    soundLoop = setInterval(function () {
+        sounds.play('musicainstrucoes');
+    }, 144000);
 }
+
 function showInstrucoesMinusculasModal() {
-    game.paused = true;
     reg.modal.showModal("instrucoesMinusculas");
+    game.sound.stopAll();
+    sounds.play('musicainstrucoes');
+    soundLoop = setInterval(function () {
+        sounds.play('musicainstrucoes');
+    }, 144000);
 }
+
 function showInstrucoesMesesModal() {
-    game.paused = true;
     reg.modal.showModal("instrucoesMeses");
+    game.sound.stopAll();
+    sounds.play('musicainstrucoes');
+    soundLoop = setInterval(function () {
+        sounds.play('musicainstrucoes');
+    }, 144000);
 }
 
 function showModalSair() {
+    game.paused = true;
     reg.modal.showModal("modalSair");
 }
 
@@ -367,13 +416,6 @@ function showNivelSuccessModal() {
 }
 
 function showGameSucessModal() {
-    game.paused = true;
     reg.modal.showModal("gameSucessModal");
     background.frame = 1;
-}
-
-
-function showPausedModal() {
-    game.paused = true;
-    reg.modal.showModal("pausedModal");
 }

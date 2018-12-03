@@ -5,6 +5,7 @@ var faseNumerais = {
 
 function criarFaseNumerais() {
 	createModals();
+	sounds.gen();
 	erros = 0;
 	acertos = 0;
 	levelNumber = 1;
@@ -13,7 +14,6 @@ function criarFaseNumerais() {
 	createGameUI();
 	criaCircuito();
 	rodadaAtual = 0;
-	novaRodada();
 	showInstrucoesNumerosModal()
 
 }

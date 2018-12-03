@@ -5,6 +5,7 @@ var faseMeses = {
 
 function criarFaseMeses() {
 	createModals();
+	sounds.gen();
 	erros = 0;
 	acertos = 0;
 	levelNumber = 4;
@@ -13,7 +14,6 @@ function criarFaseMeses() {
 	createGameUI();
 	criaCircuito();
 	rodadaAtual = 0;
-	novaRodada();
 	showInstrucoesMesesModal();
 
 }
