@@ -14,7 +14,6 @@ function criarFaseMaiusculas() {
 	createGameUI();
 	criaCircuito();
 	rodadaAtual = 0;
-	novaRodada();
 	showInstrucoesMaiusculasModal();
 
 }

@@ -9,7 +9,39 @@ function createGameUI() {
 	logoJogo.enableBody = true;
 	logoJogo.anchor.x = 0.5;
 	logoJogo.anchor.y = 0.5;
-	logoJogo.scale.setTo(0.8, 0.8);
+    logoJogo.scale.setTo(0.8, 0.8);
+    
+    estatisticas = game.add.sprite(650, 30, 'estatisticas');
+	estatisticas.enableBody = true;
+	estatisticas.anchor.x = 0.5;
+    estatisticas.anchor.y = 0.5;
+    
+    textoAcertos = game.add.text(840, 15, 0, {
+        fill: "#fff",
+        fontSize: "35px",
+        fontFamily: "Exo",
+        stroke: '#000000',
+        strokeThickness: 2
+    });
+    textoAcertos.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
+
+    textoErros = game.add.text(675, 15, 0, {
+        fill: "#fff",
+        fontSize: "35px",
+        fontFamily: "Exo",
+        stroke: '#000000',
+        strokeThickness: 2
+    });
+    textoErros.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
+
+    textoFase = game.add.text(515, 15, '1/6', {
+        fill: "#fff",
+        fontSize: "35px",
+        fontFamily: "Exo",
+        stroke: '#000000',
+        strokeThickness: 2
+    });
+    textoFase.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
 
 	btnSom = game.add.button(930, 750, 'btnSom', function(){
 		config.sounds ? config.sounds = false : config.sounds = true;

@@ -52,6 +52,7 @@ function precarregarPreload() {
     game.load.image('tentarNovamente', 'assets/tentarNovamente.png');
     game.load.image('proximoNivel','assets/proximoNivel.png');
     game.load.image('venceuNivel','assets/venceuNivel.png');
+    game.load.image('estatisticas','assets/estatisticas.png');
     game.load.spritesheet('lampada','assets/lampada.png', 70, 103, 2);
     game.load.audiosprite('sfx', ['assets/sounds/spriteJson/sprite.ogg', 'assets/sounds/spriteJson/sprite.m4a'], null, sfxJson);
 }

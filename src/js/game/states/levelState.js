@@ -8,11 +8,21 @@ var starsArray = [1, 0, 0, 0];
 
 var levels;
 
+soundLoop = null;
 function criarLevelState() {
 	sounds.gen();
 	createModals();
 	//gerando o bg
 	game.add.sprite(0, 0, 'backgroundNormal');
+
+	if(soundLoop){
+		clearInterval(soundLoop);
+	}
+	game.sound.stopAll();
+	sounds.play('musicajogo');
+	soundLoop = setInterval(function () {
+		sounds.play('musicajogo');
+	}, 150000);
 
 	var logo = game.add.sprite(game.world.centerX, game.world.centerY - 160, 'logoGrande');
 	logo.enableBody = true;

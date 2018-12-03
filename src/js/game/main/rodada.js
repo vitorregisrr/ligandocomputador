@@ -9,8 +9,12 @@ function novaRodada(venceu) {
             entradaArr: [undefined, undefined, undefined, undefined, undefined]
         };
         criaPecas();
+        textoFase.setText(rodadaAtual+1+'/6');
     } else {
         levelSuccess();
     }
 
+    if(rodadaAtual == 5){
+        sounds.play('ultima_fase');
+    }
 }

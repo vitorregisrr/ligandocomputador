@@ -24,6 +24,7 @@ function createModals() {
                     novaRodada(false);
                     circuito.frame = 0;
                     erros++;
+                    textoErros.setText(erros);
                     sounds.play('cliqueinstrucoes');
                 }
             },
@@ -54,6 +55,7 @@ function createModals() {
                     placeholders.destroy();
                     novaRodada(true);
                     acertos++;
+                    textoAcertos.setText(acertos);
                     sounds.play('cliqueinstrucoes');
                 }
             },
@@ -174,6 +176,9 @@ function createModals() {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesNumeros");
                     game.sound.stopAll();
+                    if(soundLoop){
+                        clearInterval(soundLoop);
+                    }
                     sounds.play('musicajogo');
                     soundLoop = setInterval(function () {
                         sounds.play('musicajogo');
@@ -373,6 +378,9 @@ function showGameOverModal() {
 function showInstrucoesNumerosModal() {
     reg.modal.showModal("instrucoesNumeros");
     game.sound.stopAll();
+    if(soundLoop){
+		clearInterval(soundLoop);
+	}
     sounds.play('musicainstrucoes');
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
@@ -382,6 +390,9 @@ function showInstrucoesNumerosModal() {
 function showInstrucoesMaiusculasModal() {
     reg.modal.showModal("instrucoesMaiusculas");
     game.sound.stopAll();
+    if(soundLoop){
+		clearInterval(soundLoop);
+	}
     sounds.play('musicainstrucoes');
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
@@ -391,7 +402,9 @@ function showInstrucoesMaiusculasModal() {
 function showInstrucoesMinusculasModal() {
     reg.modal.showModal("instrucoesMinusculas");
     game.sound.stopAll();
-    sounds.play('musicainstrucoes');
+    if(soundLoop){
+		clearInterval(soundLoop);
+	};
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
     }, 144000);
@@ -400,6 +413,9 @@ function showInstrucoesMinusculasModal() {
 function showInstrucoesMesesModal() {
     reg.modal.showModal("instrucoesMeses");
     game.sound.stopAll();
+    if(soundLoop){
+		clearInterval(soundLoop);
+	}
     sounds.play('musicainstrucoes');
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');

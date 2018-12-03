@@ -127,13 +127,12 @@ function criaPecas() {
     textoCronometro = game.add.text(800, 50, peca.valor, {
         fill: "#fff",
         fontSize: "120px",
-        fontFamily: "Exo"
+        fontFamily: "Exo",
+        stroke: '#000000',
+        strokeThickness: 2,
     });
-
-    textoCronometro.alpha = 0;
-    textoCronometro.stroke = '#000000';
-    textoCronometro.strokeThickness = 2;
     textoCronometro.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
+    textoCronometro.alpha = 0;
 
     var cont = 0;
     cronometro = game.time.events.add(Phaser.Timer.SECOND * 3, function () {
