@@ -104,7 +104,8 @@ function createModals() {
                 type: "image",
                 content: "sairSim",
                 offsetY: 50,
-                offsetX: 100,
+                offsetX: 130,
+                contentScale: 0.8,
                 callback: function () {
                     game.paused = false;
                     game.state.start('levelState');
@@ -115,7 +116,8 @@ function createModals() {
                 type: "image",
                 content: "sairNao",
                 offsetY: 50,
-                offsetX: -100,
+                offsetX: -130,
+                contentScale: 0.8,
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("modalSair");
@@ -406,7 +408,7 @@ function showInstrucoesNumerosModal() {
     sounds.play('musicainstrucoes');
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
-    }, 144000);
+    }, 20000);
 }
 
 function showInstrucoesMaiusculasModal() {
@@ -419,7 +421,7 @@ function showInstrucoesMaiusculasModal() {
     sounds.play('musicainstrucoes');
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
-    }, 144000);
+    }, 20000);
 }
 
 function showInstrucoesMinusculasModal() {
@@ -431,7 +433,7 @@ function showInstrucoesMinusculasModal() {
 	};
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
-    }, 144000);
+    }, 20000);
 }
 
 function showInstrucoesMesesModal() {
@@ -444,7 +446,7 @@ function showInstrucoesMesesModal() {
     sounds.play('musicainstrucoes');
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
-    }, 144000);
+    }, 20000);
 }
 
 function showModalSair() {

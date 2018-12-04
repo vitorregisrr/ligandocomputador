@@ -4,7 +4,7 @@ var levelState = {
 };
 
 //local storage progress stars array
-var starsArray = [1, 0, 0, 0];
+var starsArray = [1, 1, 1, 1];
 
 var levels;
 

@@ -173,7 +173,7 @@ function criaPecas() {
     textoContagem.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
     textoContagem.alpha = 0;
 
-    var cont = 0;
+    var cont = 10;
     cronometro = game.time.events.add(Phaser.Timer.SECOND * 3, function () {
         pecas.forEach(function (peca) {
             peca.flipTween = game.add.tween(peca.scale).to({
@@ -196,11 +196,11 @@ function criaPecas() {
         });
         sounds.play('cronometro');
         cronometro = game.time.events.loop(Phaser.Timer.SECOND * 1, function () {
-            cont++;
+            cont--;
             textoCronometro.text = cont;
             textoCronometro.alpha = 1;
             textoContagem.alpha = 1;
-            if (cont == 10) {
+            if (cont == 0) {
                 game.time.events.remove(cronometro);
                 textoCronometro.destroy();
                 textoContagem.destroy();
