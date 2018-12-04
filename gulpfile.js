@@ -49,5 +49,5 @@ gulp.task('js', function () {
         ])
         .pipe(concat('main.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('src/js/'));
+        .pipe(gulp.dest('src/'));
 });

@@ -113075,6 +113075,12 @@ PIXI.canUseNewCanvasBlendModes = function ()
 */
 
 var sfxJson = {
+  "resources": [
+    "sprite.ogg",
+    "sprite.m4a",
+    "sprite.mp3",
+    "sprite.ac3"
+  ],
   "spritemap": {
     "cliqueinstrucoes": {
       "start": 0,
@@ -113098,27 +113104,27 @@ var sfxJson = {
     },
     "musicainstrucoes": {
       "start": 20,
-      "end": 179.60816326530613,
+      "end": 40.924081632653056,
       "loop": false
     },
     "musicajogo": {
-      "start": 181,
-      "end": 355.49795918367346,
+      "start": 42,
+      "end": 214.01632653061225,
       "loop": false
     },
     "parabenscompletou": {
-      "start": 357,
-      "end": 360.5526530612245,
+      "start": 216,
+      "end": 219.55265306122448,
       "loop": false
     },
     "quepena": {
-      "start": 362,
-      "end": 362.2873469387755,
+      "start": 221,
+      "end": 221.2873469387755,
       "loop": false
     },
     "ultima_fase": {
-      "start": 364,
-      "end": 366.16816326530613,
+      "start": 223,
+      "end": 225.16816326530613,
       "loop": false
     }
   }
@@ -113154,28 +113160,28 @@ var bancoCombinacoes = {
 
     "letrasMaiusculas": [
         [
-            ['d', 'e', 'c', 'b', 'a'],
-            ['a', 'b', 'c', 'd', 'e']
+            ['D', 'E', 'C', 'B', 'A'],
+            ['A', 'B', 'C', 'D', 'E']
         ],
         [
-            ['j', 'g', 'i', 'f', 'h'],
-            ['f', 'g', 'h', 'i', 'j']
+            ['J', 'G', 'I', 'F', 'H'],
+            ['F', 'G', 'H', 'I', 'J']
         ],
         [
-            ['l', 'o', 'm', 'n', 'k'],
-            ['k', 'l', 'm', 'n', 'o']
+            ['L', 'O', 'M', 'N', 'K'],
+            ['K', 'L', 'M', 'N', 'O']
         ],
         [
-            ['p', 't', 'q', 'r', 's'],
-            ['p', 'q', 'r', 's', 't']
+            ['P', 'T', 'Q', 'R', 'S'],
+            ['P', 'Q', 'R', 'S', 'T']
         ],
         [
-            ['v', 'w', 'y', 'x', 'u'],
-            ['u', 'v', 'w', 'x', 'y']
+            ['V', 'W', 'Y', 'X', 'U'],
+            ['U', 'V', 'W', 'X', 'Y']
         ],
         [
-            ['p', 'c', 'z', 'n', 'a'],
-            ['a', 'c', 'n', 'p', 'z']
+            ['P', 'C', 'Z', 'N', 'A'],
+            ['A', 'C', 'N', 'P', 'Z']
         ]
     ],
 
@@ -113277,9 +113283,19 @@ function pecaSolta(peca) {
         overlap.peca = peca;
         rodada.entradaArr[overlap.posicao] = peca.valor;
 
+        game.add.tween(peca.scale).to({
+            x: 0.75,
+            y: 0.75
+        }, 200, Phaser.Easing.Linear.None, true);
+
     } else {
         peca.x = posPecas[peca.posicao][0];
         peca.y = posPecas[peca.posicao][1];
+
+        game.add.tween(peca.scale).to({
+            x: 0.9,
+            y: 0.9
+        }, 200, Phaser.Easing.Linear.None, true);
 
         placeholders.forEach(function (placeholder) {
             if (placeholder.peca == peca) {
@@ -113288,7 +113304,8 @@ function pecaSolta(peca) {
             }
         });
     }
-    console.log(rodada.entradaArr);
+
+    //checa se já está completado e se já ganhou
     var cont = 0;
     rodada.entradaArr.forEach(function (item) {
         if (item != undefined) {
@@ -113300,6 +113317,25 @@ function pecaSolta(peca) {
         for (x = 0; x < rodada.entradaArr.length; x++) {
             if (Array.from(rodada.entradaArr)[x] == Array.from(rodada.corretoArr)[x]) {
                 lampadas.getAt(x).frame = 1;
+                pecas.forEach(function (peca) {
+                    peca.flipTween = game.add.tween(peca.scale).to({
+                        x: 0,
+                        y: 1.2
+                    }, 500 / 2, Phaser.Easing.Linear.None);
+        
+                    var fix = levelType == "letrasMaiusculas" ? fix = "M" : fix = "";
+                    peca.flipTween.onComplete.add(function () {
+                        peca.loadTexture('peca_'+peca.valor+fix)
+                        peca.backFlipTween.start();
+                    }, this);
+        
+                    peca.backFlipTween = game.add.tween(peca.scale).to({
+                        x: 0.9,
+                        y: 0.9
+                    }, 500 / 2, Phaser.Easing.Linear.None);
+        
+                    peca.flipTween.start();
+                });
             }
         }
 
@@ -113321,7 +113357,6 @@ function pecaSolta(peca) {
                 peca.input.draggable = false;
             });
             showGameOverModal();
-
         }
     }
 
@@ -113335,11 +113370,11 @@ function criaPecas() {
     });
 
     var posPlaceHolders = [
-        [146, 630],
-        [295, 630],
-        [456, 630],
-        [616, 630],
-        [774, 630]
+        [140, 622],
+        [297, 622],
+        [456, 621],
+        [612, 623],
+        [770, 623]
     ];
 
     placeholders = game.add.group();
@@ -113357,11 +113392,11 @@ function criaPecas() {
     pecas = game.add.group();
 
     posPecas = [
-        [124, 310],
-        [299, 310],
-        [477, 310],
-        [645, 310],
-        [822.5, 310]
+        [122, 317],
+        [299, 317],
+        [482, 317],
+        [656, 317],
+        [829, 317]
     ];
 
     for (x = 0; x <= rodada.pecasArr.length - 1; x++) {
@@ -113369,7 +113404,7 @@ function criaPecas() {
         var peca = game.add.sprite(posPecas[x][0], posPecas[x][1], 'verso_carta');
         peca.posicao = x;
         peca.valor = rodada.pecasArr[x];
-        peca.scale.setTo(0.8, 0.8);
+        peca.scale.setTo(0.9, 0.9);
         peca.frame = 1;
 
         peca.anchor.set(0.5);
@@ -113378,6 +113413,7 @@ function criaPecas() {
         text = game.add.text(0, 0, peca.valor, {
             fill: "#fff",
         });
+        text.alpha = 0;
         peca.addChild(text);
     }
 
@@ -113390,8 +113426,17 @@ function criaPecas() {
     });
     textoCronometro.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
     textoCronometro.alpha = 0;
+    textoContagem = game.add.text(470, 100, 'Contagem regressiva!', {
+        fill: "#fff",
+        fontSize: "30px",
+        fontFamily: "Exo",
+        stroke: '#000000',
+        strokeThickness: 2,
+    });
+    textoContagem.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
+    textoContagem.alpha = 0;
 
-    var cont = 0;
+    var cont = 10;
     cronometro = game.time.events.add(Phaser.Timer.SECOND * 3, function () {
         pecas.forEach(function (peca) {
             peca.flipTween = game.add.tween(peca.scale).to({
@@ -113399,31 +113444,41 @@ function criaPecas() {
                 y: 1.2
             }, 200 / 2, Phaser.Easing.Linear.None);
 
+            var fix = levelType == "letrasMaiusculas" ? fix = "M" : fix = "";
             peca.flipTween.onComplete.add(function () {
-                peca.frame = 0;
+                peca.loadTexture('peca_'+peca.valor+fix)
                 peca.backFlipTween.start();
             }, this);
 
             peca.backFlipTween = game.add.tween(peca.scale).to({
-                x: 0.8,
-                y: 0.8
+                x: 0.9,
+                y: 0.9
             }, 200 / 2, Phaser.Easing.Linear.None);
 
             peca.flipTween.start();
         });
         sounds.play('cronometro');
         cronometro = game.time.events.loop(Phaser.Timer.SECOND * 1, function () {
-            cont++;
+            cont--;
             textoCronometro.text = cont;
             textoCronometro.alpha = 1;
-            if (cont == 10) {
+            textoContagem.alpha = 1;
+            if (cont == 0) {
                 game.time.events.remove(cronometro);
                 textoCronometro.destroy();
+                textoContagem.destroy();
 
                 pecas.forEach(function (peca) {
                     peca.inputEnabled = true;
                     peca.input.enableDrag(true);
                     peca.events.onDragStop.add(pecaSolta, this);
+                    peca.events.onDragStart.add(function () {
+                        game.add.tween(peca.scale).to({
+                            x: 0.9,
+                            y: 0.9
+                        }, 200, Phaser.Easing.Linear.None, true);
+                        sounds.play('cliqueinstrucoes');
+                    }, this);
 
                     peca.flipTween = game.add.tween(peca.scale).to({
                         x: 0,
@@ -113431,13 +113486,13 @@ function criaPecas() {
                     }, 200 / 2, Phaser.Easing.Linear.None);
 
                     peca.flipTween.onComplete.add(function () {
-                        peca.frame == 1 ? peca.frame = 0 : peca.frame = 1;
+                        peca.loadTexture('verso_carta')
                         peca.backFlipTween.start();
                     }, this);
 
                     peca.backFlipTween = game.add.tween(peca.scale).to({
-                        x: 0.8,
-                        y: 0.8
+                        x: 0.9,
+                        y: 0.9
                     }, 200 / 2, Phaser.Easing.Linear.None);
 
                     peca.flipTween.start();
@@ -113644,6 +113699,7 @@ gameModal = function(game) {
                 var graphicH = item.graphicHeight || 200;
                 var graphicRadius = item.graphicRadius || 0;
                 var lockPosition = item.lockPosition || false;
+                var alpha = item.alpha == 0 ? 0 : 1;
 
                 var itemAnchor = item.anchor || { x: 0, y: 0 };
                 var itemAngle = item.angle || 0;
@@ -113703,6 +113759,7 @@ gameModal = function(game) {
                     modalLabel.contentType = 'sprite';
                     modalLabel.x = (centerX - ((modalLabel.width) / 2)) + offsetX;
                     modalLabel.y = (centerY - ((modalLabel.height) / 2)) + offsetY;
+                    modalLabel.alpha = alpha;
                 } else if (itemType === "button") {
                     modalLabel = game.add.button(0, 0, atlasParent, callback,
                         this, buttonHover, content, buttonActive, content);
@@ -114781,7 +114838,7 @@ function createModals() {
             {
                 type: "image",
                 content: "tentarNovamente",
-                offsetY: 20,
+                offsetY: 10,
                 offsetX: 0,
                 callback: function () {
                     game.paused = false;
@@ -114813,7 +114870,7 @@ function createModals() {
             {
                 type: "image",
                 content: "proximoNivel",
-                offsetY: 20,
+                offsetY: 10,
                 offsetX: 0,
                 callback: function () {
                     game.paused = false;
@@ -114843,7 +114900,7 @@ function createModals() {
             },
             {
                 type: "image",
-                content: "proximoNivel",
+                content: "proximoDesafio",
                 offsetY: 90,
                 offsetX: 0,
                 callback: function () {
@@ -114872,7 +114929,8 @@ function createModals() {
                 type: "image",
                 content: "sairSim",
                 offsetY: 50,
-                offsetX: 100,
+                offsetX: 130,
+                contentScale: 0.8,
                 callback: function () {
                     game.paused = false;
                     game.state.start('levelState');
@@ -114883,7 +114941,8 @@ function createModals() {
                 type: "image",
                 content: "sairNao",
                 offsetY: 50,
-                offsetX: -100,
+                offsetX: -130,
+                contentScale: 0.8,
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("modalSair");
@@ -114932,6 +114991,8 @@ function createModals() {
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesNumeros', 3);
                     sounds.play('cliqueinstrucoes');
+                    reg.modal.getModalItem("instrucoesNumeros", 6).alpha = 1;
+                    
                 }
             },
             {
@@ -114940,6 +115001,7 @@ function createModals() {
                 offsetY: 260,
                 offsetX: 0,
                 contentScale: 1,
+                alpha: 0,
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesNumeros");
@@ -114994,6 +115056,7 @@ function createModals() {
                 contentScale: 1,
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesMaiusculas', 3);
+                    reg.modal.getModalItem("instrucoesMaiusculas", 6).alpha = 1;
                 }
             },
             {
@@ -115001,6 +115064,7 @@ function createModals() {
                 content: "iniciar",
                 offsetY: 260,
                 offsetX: 0,
+                alpha: 0,
                 contentScale: 1,
                 callback: function () {
                     game.paused = false;
@@ -115057,6 +115121,7 @@ function createModals() {
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesMinusculas', 3);
                     sounds.play('cliqueinstrucoes');
+                    reg.modal.getModalItem("instrucoesMinusculas", 6).alpha = 1;
                 }
             },
             {
@@ -115064,6 +115129,7 @@ function createModals() {
                 content: "iniciar",
                 offsetY: 260,
                 offsetX: 0,
+                alpha: 0,
                 contentScale: 1,
                 callback: function () {
                     game.paused = false;
@@ -115122,6 +115188,7 @@ function createModals() {
                 callback: function () {
                     reg.modal.updateModalValue(1, 'instrucoesMeses', 3);
                     sounds.play('cliqueinstrucoes');
+                    reg.modal.getModalItem("instrucoesMeses", 6).alpha = 1;
                 }
             },
             {
@@ -115130,6 +115197,7 @@ function createModals() {
                 offsetY: 260,
                 offsetX: 0,
                 contentScale: 1,
+                alpha: 0,
                 callback: function () {
                     game.paused = false;
                     reg.modal.hideModal("instrucoesMeses");
@@ -115158,61 +115226,68 @@ function showGameOverModal() {
 function showInstrucoesNumerosModal() {
     reg.modal.showModal("instrucoesNumeros");
     game.sound.stopAll();
+    btnSom.bringToTop();
     if(soundLoop){
 		clearInterval(soundLoop);
 	}
     sounds.play('musicainstrucoes');
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
-    }, 144000);
+    }, 20000);
 }
 
 function showInstrucoesMaiusculasModal() {
     reg.modal.showModal("instrucoesMaiusculas");
     game.sound.stopAll();
+    btnSom.bringToTop();
     if(soundLoop){
 		clearInterval(soundLoop);
 	}
     sounds.play('musicainstrucoes');
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
-    }, 144000);
+    }, 20000);
 }
 
 function showInstrucoesMinusculasModal() {
     reg.modal.showModal("instrucoesMinusculas");
     game.sound.stopAll();
+    btnSom.bringToTop();
     if(soundLoop){
 		clearInterval(soundLoop);
 	};
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
-    }, 144000);
+    }, 20000);
 }
 
 function showInstrucoesMesesModal() {
     reg.modal.showModal("instrucoesMeses");
     game.sound.stopAll();
+    btnSom.bringToTop();
     if(soundLoop){
 		clearInterval(soundLoop);
 	}
     sounds.play('musicainstrucoes');
     soundLoop = setInterval(function () {
         sounds.play('musicainstrucoes');
-    }, 144000);
+    }, 20000);
 }
 
 function showModalSair() {
     game.paused = true;
     reg.modal.showModal("modalSair");
+    btnSom.bringToTop();
 }
 
 function showNivelSuccessModal() {
     reg.modal.showModal("nivelSuccess");
+    btnSom.bringToTop();
 }
 
 function showGameSucessModal() {
     reg.modal.showModal("gameSucessModal");
+    btnSom.bringToTop();
     background.frame = 1;
 }
 
@@ -115282,10 +115357,16 @@ function createGameUI() {
     textoFase.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
 
 	btnSom = game.add.button(930, 750, 'btnSom', function(){
-		config.sounds ? config.sounds = false : config.sounds = true;
-        console.log(config.sounds);
+        if(game.sound.mute){
+			game.sound.mute = false;
+			btnSom.frame = 0;
+		}else{
+			game.sound.mute = true;
+			btnSom.frame = 1;
+        };
         sounds.play('cliqueinstrucoes');
-	});
+    });
+    
 	btnSom.enableBody = true;
 	btnSom.anchor.x = 0.5;
 	btnSom.anchor.y = 0.5;
@@ -115328,7 +115409,10 @@ function attGameUI(){
         }, 100, Phaser.Easing.Linear.None, true);
     }
 }
-var preloadState = { create:criarPreload, preload: precarregarPreload}
+var preloadState = {
+    create: criarPreload,
+    preload: precarregarPreload
+}
 
 function precarregarPreload() {
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -115337,7 +115421,7 @@ function precarregarPreload() {
 
     game.stage.backgroundColor = "#ffffff";
 
-    var logo = game.add.sprite(game.world.centerX , game.world.centerY - 80, 'logoPreload');
+    var logo = game.add.sprite(game.world.centerX, game.world.centerY - 80, 'logoPreload');
     logo.enableBody = true;
     logo.anchor.x = 0.5;
     logo.anchor.y = 0.5;
@@ -115352,44 +115436,124 @@ function precarregarPreload() {
     preloadBar = game.add.sprite(game.world.centerX - 170, game.world.centerY - 4 + 40, 'preloadBar');
     this.load.setPreloadSprite(preloadBar);
 
-    game.load.spritesheet('btnNivel1','assets/btnNivel1.png', 202, 285, 3);
-    game.load.spritesheet('btnNivel2','assets/btnNivel2.png', 202, 285, 3);
-    game.load.spritesheet('btnNivel3','assets/btnNivel3.png', 202, 285, 3);
-    game.load.spritesheet('btnNivel4','assets/btnNivel4.png', 202, 285, 3);
+    game.load.spritesheet('btnNivel1', 'assets/btnNivel1.png', 202, 285, 3);
+    game.load.spritesheet('btnNivel2', 'assets/btnNivel2.png', 202, 285, 3);
+    game.load.spritesheet('btnNivel3', 'assets/btnNivel3.png', 202, 285, 3);
+    game.load.spritesheet('btnNivel4', 'assets/btnNivel4.png', 202, 285, 3);
     game.load.image('logoGrande', 'assets/logoGrande.png');
     game.load.image('logoPequeno', 'assets/logoPequeno.png');
     game.load.image('logoEditora', 'assets/logoEditora.png');
-    game.load.image('btnSom', 'assets/btnSom.png');
+    game.load.spritesheet('btnSom', 'assets/btnSom.png', 60, 54);
     game.load.image('btnClose', 'assets/btnClose.png');
-    game.load.image('backgroundNormal','assets/backgroundNormal.png');
-    game.load.spritesheet('backgroundFase','assets/backgroundFase.png', 1000, 800, 2);
-    game.load.spritesheet('verso_carta','assets/verso_carta.png', 168, 168, 2);
-    game.load.image('sairSim','assets/sairSim.png');
-    game.load.image('fundoInstrucoes','assets/fundoInstrucoes.png');
-    game.load.spritesheet('instrucoesLetrasMinusculas','assets/instrucoesLetrasMinusculas.png', 926, 572, 2);
-    game.load.spritesheet('instrucoesLetrasMaiusculas','assets/instrucoesLetrasMaiusculas.png', 926, 572, 2);
-    game.load.spritesheet('instrucoesMeses','assets/instrucoesMeses.png', 926, 572, 2);
-    game.load.spritesheet('instrucoesNumeros','assets/instrucoesNumeros.png', 926, 572, 2);
-    game.load.image('sairNao','assets/sairNao.png');
-    game.load.image('iniciar','assets/iniciar.png');
-    game.load.image('setaEsquerda','assets/setaEsquerda.png');
-    game.load.image('setaDireita','assets/setaDireita.png');
-    game.load.image('modalSair','assets/modalSair.png');
-    game.load.spritesheet('circuito','assets/circuito.png', 976, 286, 2);
-    game.load.image('venceuFase', 'assets/venceuFase.png');    
+    game.load.image('backgroundNormal', 'assets/backgroundNormal.png');
+    game.load.spritesheet('backgroundFase', 'assets/backgroundFase.png', 1000, 800, 2);
+    game.load.image('verso_carta', 'assets/verso_carta.png');
+    game.load.image('sairSim', 'assets/sairSim.png');
+    game.load.image('fundoInstrucoes', 'assets/fundoInstrucoes.png');
+    game.load.spritesheet('instrucoesLetrasMinusculas', 'assets/instrucoesLetrasMinusculas.png', 926, 572, 2);
+    game.load.spritesheet('instrucoesLetrasMaiusculas', 'assets/instrucoesLetrasMaiusculas.png', 926, 572, 2);
+    game.load.spritesheet('instrucoesMeses', 'assets/instrucoesMeses.png', 926, 572, 2);
+    game.load.spritesheet('instrucoesNumeros', 'assets/instrucoesNumeros.png', 926, 572, 2);
+    game.load.image('sairNao', 'assets/sairNao.png');
+    game.load.image('iniciar', 'assets/iniciar.png');
+    game.load.image('setaEsquerda', 'assets/setaEsquerda.png');
+    game.load.image('setaDireita', 'assets/setaDireita.png');
+    game.load.image('modalSair', 'assets/modalSair.png');
+    game.load.spritesheet('circuito', 'assets/circuito.png', 976, 286, 2);
+    game.load.image('venceuFase', 'assets/venceuFase.png');
     game.load.image('perdeuFase', 'assets/perdeuFase.png');
-    game.load.image('fundoPecas','assets/fundoPecas.png');
+    game.load.image('fundoPecas', 'assets/fundoPecas.png');
     game.load.image('tentarNovamente', 'assets/tentarNovamente.png');
-    game.load.image('proximoNivel','assets/proximoNivel.png');
-    game.load.image('venceuNivel','assets/venceuNivel.png');
-    game.load.image('estatisticas','assets/estatisticas.png');
-    game.load.spritesheet('lampada','assets/lampada.png', 70, 103, 2);
+    game.load.image('proximoNivel', 'assets/proximoNivel.png');
+    game.load.image('venceuNivel', 'assets/venceuNivel.png');
+    game.load.image('proximoDesafio', 'assets/proximoDesafio.png');
+    game.load.image('estatisticas', 'assets/estatisticas.png');
+    game.load.spritesheet('lampada', 'assets/lampada.png', 70, 103, 2);
     game.load.audiosprite('sfx', ['assets/sounds/spriteJson/sprite.ogg', 'assets/sounds/spriteJson/sprite.m4a'], null, sfxJson);
+
+    game.load.image('peca_0', 'assets/peca_0.png');
+    game.load.image('peca_1', 'assets/peca_1.png');
+    game.load.image('peca_2', 'assets/peca_2.png');
+    game.load.image('peca_3', 'assets/peca_3.png');
+    game.load.image('peca_4', 'assets/peca_4.png');
+    game.load.image('peca_5', 'assets/peca_5.png');
+    game.load.image('peca_6', 'assets/peca_6.png');
+    game.load.image('peca_7', 'assets/peca_7.png');
+    game.load.image('peca_8', 'assets/peca_8.png');
+    game.load.image('peca_9', 'assets/peca_9.png');
+    game.load.image('peca_10', 'assets/peca_10.png');
+
+    game.load.image('peca_AM', 'assets/peca_AM.png');
+    game.load.image('peca_BM', 'assets/peca_BM.png');
+    game.load.image('peca_CM', 'assets/peca_CM.png');
+    game.load.image('peca_DM', 'assets/peca_DM.png');
+    game.load.image('peca_EM', 'assets/peca_EM.png');
+    game.load.image('peca_FM', 'assets/peca_FM.png');
+    game.load.image('peca_GM', 'assets/peca_GM.png');
+    game.load.image('peca_HM', 'assets/peca_HM.png');
+    game.load.image('peca_IM', 'assets/peca_IM.png');
+    game.load.image('peca_JM', 'assets/peca_JM.png');
+    game.load.image('peca_KM', 'assets/peca_KM.png');
+    game.load.image('peca_LM', 'assets/peca_LM.png');
+    game.load.image('peca_MM', 'assets/peca_MM.png');
+    game.load.image('peca_NM', 'assets/peca_NM.png');
+    game.load.image('peca_OM', 'assets/peca_OM.png');
+    game.load.image('peca_PM', 'assets/peca_PM.png');
+    game.load.image('peca_QM', 'assets/peca_QM.png');
+    game.load.image('peca_RM', 'assets/peca_RM.png');
+    game.load.image('peca_SM', 'assets/peca_SM.png');
+    game.load.image('peca_TM', 'assets/peca_TM.png');
+    game.load.image('peca_UM', 'assets/peca_UM.png');
+    game.load.image('peca_VM', 'assets/peca_VM.png');
+    game.load.image('peca_WM', 'assets/peca_WM.png');
+    game.load.image('peca_XM', 'assets/peca_XM.png');
+    game.load.image('peca_YM', 'assets/peca_YM.png');
+    game.load.image('peca_ZM', 'assets/peca_ZM.png');
+
+    game.load.image('peca_a', 'assets/peca_a.png');
+    game.load.image('peca_b', 'assets/peca_b.png');
+    game.load.image('peca_c', 'assets/peca_c.png');
+    game.load.image('peca_d', 'assets/peca_d.png');
+    game.load.image('peca_e', 'assets/peca_e.png');
+    game.load.image('peca_f', 'assets/peca_f.png');
+    game.load.image('peca_g', 'assets/peca_g.png');
+    game.load.image('peca_h', 'assets/peca_h.png');
+    game.load.image('peca_i', 'assets/peca_i.png');
+    game.load.image('peca_j', 'assets/peca_m.png');
+    game.load.image('peca_k', 'assets/peca_k.png');
+    game.load.image('peca_l', 'assets/peca_l.png');
+    game.load.image('peca_m', 'assets/peca_m.png');
+    game.load.image('peca_n', 'assets/peca_n.png');
+    game.load.image('peca_o', 'assets/peca_o.png');
+    game.load.image('peca_p', 'assets/peca_p.png');
+    game.load.image('peca_q', 'assets/peca_q.png');
+    game.load.image('peca_r', 'assets/peca_r.png');
+    game.load.image('peca_s', 'assets/peca_s.png');
+    game.load.image('peca_t', 'assets/peca_t.png');
+    game.load.image('peca_u', 'assets/peca_u.png');
+    game.load.image('peca_v', 'assets/peca_v.png');
+    game.load.image('peca_w', 'assets/peca_w.png');
+    game.load.image('peca_x', 'assets/peca_x.png');
+    game.load.image('peca_y', 'assets/peca_y.png');
+    game.load.image('peca_z', 'assets/peca_z.png');
+
+    game.load.image('peca_janeiro', 'assets/peca_janeiro.png');
+    game.load.image('peca_fevereiro', 'assets/peca_fevereiro.png');
+    game.load.image('peca_marco', 'assets/peca_marco.png');
+    game.load.image('peca_maio', 'assets/peca_maio.png');
+    game.load.image('peca_abril', 'assets/peca_abril.png');
+    game.load.image('peca_junho', 'assets/peca_junho.png');
+    game.load.image('peca_julho', 'assets/peca_julho.png');
+    game.load.image('peca_agosto', 'assets/peca_agosto.png');
+    game.load.image('peca_outubro', 'assets/peca_outubro.png');
+    game.load.image('peca_setembro', 'assets/peca_setembro.png');
+    game.load.image('peca_novembro', 'assets/peca_novembro.png');
+    game.load.image('peca_dezembro', 'assets/peca_dezembro.png');
 }
 
 
-function criarPreload(){
-   game.state.start('levelState');
+function criarPreload() {
+    game.state.start('levelState');
 }
 var bootState = { create:criarBoot, preload: precarregarBoot}
 
@@ -115411,7 +115575,7 @@ var levelState = {
 };
 
 //local storage progress stars array
-var starsArray = [1, 0, 0, 0];
+var starsArray = [1, 1, 1, 1];
 
 var levels;
 
@@ -115444,9 +115608,13 @@ function criarLevelState() {
 	logoEditora.scale.setTo(0.8, 0.8);
 
 	btnSom = game.add.button(930, 740, 'btnSom', function(){
-		config.sounds ? config.sounds = false : config.sounds = true;
-		console.log(config.sounds);
-		sounds.play('cliqueinstrucoes');
+		if(game.sound.mute){
+			game.sound.mute = false;
+			btnSom.frame = 0;
+		}else{
+			game.sound.mute = true;
+			btnSom.frame = 1;
+		};
 	});
 
 	btnSom.enableBody = true;
@@ -115556,6 +115724,34 @@ function criarFaseNumerais() {
 
 function atualizarFaseNumerais() {
 	attGameUI();
+
+	
+	var setaDireita =  reg.modal.getModalItem("instrucoesNumeros", 5);
+	var setaEsquerda = reg.modal.getModalItem("instrucoesNumeros", 4);
+
+	if (setaDireita.input.pointerOver()) {
+		game.add.tween(setaDireita.scale).to({
+			x: 1.1,
+			y: 1.1,
+		}, 100, Phaser.Easing.Linear.None, true);
+	} else {
+		game.add.tween(setaDireita.scale).to({
+			x: 1,
+			y: 1
+		}, 100, Phaser.Easing.Linear.None, true);
+	}
+
+	if (setaEsquerda.input.pointerOver()) {
+		game.add.tween(setaEsquerda.scale).to({
+			x: 1.1,
+			y: 1.1,
+		}, 100, Phaser.Easing.Linear.None, true);
+	} else {
+		game.add.tween(setaEsquerda.scale).to({
+			x: 1,
+			y: 1
+		}, 100, Phaser.Easing.Linear.None, true);
+	}
 }
 var faseMaiusculas = {
 	create: criarFaseMaiusculas,
@@ -115579,6 +115775,33 @@ function criarFaseMaiusculas() {
 
 function atualizarFaseMaiusculas() {
 	attGameUI();
+
+	var setaDireita =  reg.modal.getModalItem("instrucoesMaiusculas", 5);
+	var setaEsquerda = reg.modal.getModalItem("instrucoesMaiusculas", 4);
+
+	if (setaDireita.input.pointerOver()) {
+		game.add.tween(setaDireita.scale).to({
+			x: 1.1,
+			y: 1.1,
+		}, 100, Phaser.Easing.Linear.None, true);
+	} else {
+		game.add.tween(setaDireita.scale).to({
+			x: 1,
+			y: 1
+		}, 100, Phaser.Easing.Linear.None, true);
+	}
+
+	if (setaEsquerda.input.pointerOver()) {
+		game.add.tween(setaEsquerda.scale).to({
+			x: 1.1,
+			y: 1.1,
+		}, 100, Phaser.Easing.Linear.None, true);
+	} else {
+		game.add.tween(setaEsquerda.scale).to({
+			x: 1,
+			y: 1
+		}, 100, Phaser.Easing.Linear.None, true);
+	}
 }
 var faseMinusculas = {
 	create: criarFaseMinusculas,
@@ -115602,6 +115825,34 @@ function criarFaseMinusculas() {
 
 function atualizarFaseMinusculas() {
 	attGameUI();
+
+	
+	var setaDireita =  reg.modal.getModalItem("instrucoesMinusculas", 5);
+	var setaEsquerda = reg.modal.getModalItem("instrucoesMinusculas", 4);
+
+	if (setaDireita.input.pointerOver()) {
+		game.add.tween(setaDireita.scale).to({
+			x: 1.1,
+			y: 1.1,
+		}, 100, Phaser.Easing.Linear.None, true);
+	} else {
+		game.add.tween(setaDireita.scale).to({
+			x: 1,
+			y: 1
+		}, 100, Phaser.Easing.Linear.None, true);
+	}
+
+	if (setaEsquerda.input.pointerOver()) {
+		game.add.tween(setaEsquerda.scale).to({
+			x: 1.1,
+			y: 1.1,
+		}, 100, Phaser.Easing.Linear.None, true);
+	} else {
+		game.add.tween(setaEsquerda.scale).to({
+			x: 1,
+			y: 1
+		}, 100, Phaser.Easing.Linear.None, true);
+	}
 }
 var faseMeses = {
 	create: criarFaseMeses,
@@ -115625,9 +115876,38 @@ function criarFaseMeses() {
 
 function atualizarFaseMeses() {
 	attGameUI();
+
+	
+	var setaDireita =  reg.modal.getModalItem("instrucoesMeses", 5);
+	var setaEsquerda = reg.modal.getModalItem("instrucoesMeses", 4);
+
+	if (setaDireita.input.pointerOver()) {
+		game.add.tween(setaDireita.scale).to({
+			x: 1.1,
+			y: 1.1,
+		}, 100, Phaser.Easing.Linear.None, true);
+	} else {
+		game.add.tween(setaDireita.scale).to({
+			x: 1,
+			y: 1
+		}, 100, Phaser.Easing.Linear.None, true);
+	}
+
+	if (setaEsquerda.input.pointerOver()) {
+		game.add.tween(setaEsquerda.scale).to({
+			x: 1.1,
+			y: 1.1,
+		}, 100, Phaser.Easing.Linear.None, true);
+	} else {
+		game.add.tween(setaEsquerda.scale).to({
+			x: 1,
+			y: 1
+		}, 100, Phaser.Easing.Linear.None, true);
+	}
 }
 var game;
 var reg = {};
+
 function loadgame() {
     var screenWidth = 1000;
     var screenHeight = 800;
@@ -115649,8 +115929,8 @@ function loadgame() {
 
     //define estado inicial
     game.state.start('bootState');
+    game.sound.mute = false;
 }
-
 loadgame();
 
 function levelSuccess() {
