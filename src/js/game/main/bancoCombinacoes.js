@@ -93,7 +93,7 @@ var bancoCombinacoes = {
         ],
         [
             ['novembro', 'outubro', 'dezembro', 'setembro', 'agosto'],
-            ['agosto', 'outubro', 'setembro', 'novembro', 'dezembro']
+            ['agosto', 'setembro', 'outubro', 'novembro', 'dezembro']
         ],
         [
             ['julho', 'setembro', 'maio', 'janeiro', 'marco'],
@@ -101,11 +101,11 @@ var bancoCombinacoes = {
         ],
         [
             ['abril', 'outubro', 'setembro', 'dezembro', 'fevereiro'],
-            ['fevereiro', 'abril', 'outubro', 'setembro', 'dezembro']
+            ['fevereiro', 'abril', 'setembro', 'outubro', 'dezembro']
         ],
         [
             ['dezembro', 'agosto', 'junho', 'setembro', 'outubro'],
-            ['junho', 'agosto', 'outubro', 'setembro', 'dezembro']
+            ['junho', 'agosto', 'setembro', 'outubro', 'dezembro']
         ]
     ]
 };

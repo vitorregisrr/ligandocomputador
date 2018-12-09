@@ -20,33 +20,33 @@ gulp.task('imagesmin', function () {
 
 gulp.task('js', function () {
     gulp.src([
-            'src/js/phaser.js',
+            'canvasAPK/js/phaser.js',
 
-            'src/js/game/main/soundsJson.js',
-            'src/js/game/main/bancoCombinacoes.js',
-            'src/js/game/main/criaCircuito.js',
-            'src/js/game/main/eventoPecas.js',
-            'src/js/game/main/sounds.js',
+            'canvasAPK/js/game/main/soundsJson.js',
+            'canvasAPK/js/game/main/bancoCombinacoes.js',
+            'canvasAPK/js/game/main/criaCircuito.js',
+            'canvasAPK/js/game/main/eventoPecas.js',
+            'canvasAPK/js/game/main/sounds.js',
 
-            'src/js/libs/modalLib.js',
-            'src/js/libs/tooltipLib.js',
-            'src/js/libs/phase-slide.js',
+            'canvasAPK/js/libs/modalLib.js',
+            'canvasAPK/js/libs/tooltipLib.js',
+            'canvasAPK/js/libs/phase-slide.js',
 
-            'src/js/game/main/modalsGen.js',
-            'src/js/game/main/rodada.js',
-            'src/js/game/main/gameUI.js',
+            'canvasAPK/js/game/main/modalsGen.js',
+            'canvasAPK/js/game/main/rodada.js',
+            'canvasAPK/js/game/main/gameUI.js',
 
-            'src/js/game/states/preloadState.js',
-            'src/js/game/states/bootState.js',
-            'src/js/game/states/levelState.js',
-            'src/js/game/states/faseNumerais.js',
-            'src/js/game/states/faseMaiusculas.js',
-            'src/js/game/states/faseMinusculas.js',
-            'src/js/game/states/faseMeses.js',
+            'canvasAPK/js/game/states/preloadState.js',
+            'canvasAPK/js/game/states/bootState.js',
+            'canvasAPK/js/game/states/levelState.js',
+            'canvasAPK/js/game/states/faseNumerais.js',
+            'canvasAPK/js/game/states/faseMaiusculas.js',
+            'canvasAPK/js/game/states/faseMinusculas.js',
+            'canvasAPK/js/game/states/faseMeses.js',
 
-            'src/js/game/main/gameLoadStates.js',
+            'canvasAPK/js/game/main/gameLoadStates.js',
 
         ])
         .pipe(concat('main.js'))
-        .pipe(gulp.dest('src/'));
+        .pipe(gulp.dest('canvasAPK/'));
 });
