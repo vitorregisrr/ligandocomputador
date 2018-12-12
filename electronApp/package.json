@@ -1,8 +1,8 @@
 {
-  "name": "electronapp",
-  "productName": "electronapp",
+  "name": "ligandocomputador",
+  "productName": "Ligando o Computador",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Jogo Educativo",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -21,7 +21,8 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "electronapp"
+          "name": "electronapp",
+          "loadingGif": "assets/icon.png"
           }
         },
         {
@@ -39,6 +40,16 @@
           "config": {}
         }
       ]
+    },
+    
+    "electronWinstallerConfig": {
+      "name": "Ligando o Computador",
+      "loadingGif": "src/assets/loading.gif",
+      "setupIcon": "src/assets/icon.png"
+    },
+
+    "electronPackagerConfig": {
+      "icon": "src/assets/icon.png"
     }
   },
   "dependencies": {
