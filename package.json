@@ -8,7 +8,7 @@
     "gulp-uglify": "^3.0.1"
   },
   "devDependencies": {
-    "electron": "^3.0.10",
+    "electron": "^7.2.4",
     "gulp-audiosprite": "^1.1.0",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^5.0.3"
